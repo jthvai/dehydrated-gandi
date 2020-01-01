@@ -5,12 +5,12 @@
 
 # set -x
 
-if [ -z "${API_KEY}" ]; then
+if [ -z $API_KEY ]; then
   echo "Can't find API key. Please export API_KEY environment variable !"
   exit 1
 fi
 
-API_ENDPOINT="https://dns.api.gandi.net/api/v5"
+API_ENDPOINT='https://dns.api.gandi.net/api/v5'
 
 deploy_challenge() {
   local DOMAIN="${1}" RECORD="_acme-challenge.${1}." TOKEN_VALUE=${3}

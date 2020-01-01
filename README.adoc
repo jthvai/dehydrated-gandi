@@ -1,0 +1,42 @@
+Dehydrated Hook for Gandi LiveDNS
+=================================
+
+Bash wrapper to create and renew Let's Encrypt SSL certificates using
+the https://github.com/lukas2511/dehydrated[dehydrated] ACME client, the
+DNS-01 challenge, and Gandi's LiveDNS API.
+
+Forked from
+https://github.com/tchabaud/lets-encrypt-gandi[tchabaud/lets-encrypt-gandi].
+
+This adaptation does not use the `--cron` option of dehydrated, and
+instead manually generates certificate requests - for the benefit of my
+obsession with elliptical curve keys.
+
+NOTE: This script has only been tested on Arch Linux, though it should
+      work on any environment that contains the binaries listed in
+      <<dependencies,dependencies>>.
+
+
+[#dependencies]
+Dependencies
+------------
+
+* https://www.gnu.org/software/bash[bash]
+* https://www.gnu.org/software/coreutils[coreutils]
+* https://curl.haxx.se[curl]
+* https://www.openssl.org[openssl]
+
+These can be found as `pacman` packages in the official Arch Linux
+repositories.
+
+* A https://doc.livedns.gandi.net/#step-1-get-your-api-key[Gandi LiveDNS API key].
+
+
+License
+-------
+
+  Copyright 2018 Thomas Chabaud, GPL v3.0
+  Copyright 2020 Elias Yuan, GPL v3.0+
+
+Refer to link:LICENSE[LICENSE] for the full text. You may also acquire a
+copy from https://gitlab.com/jthvai/licenses/raw/master/GPL-3.0.txt[here].
