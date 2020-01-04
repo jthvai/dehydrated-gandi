@@ -108,6 +108,15 @@ if [ ! -d $WORKDIR/accounts ]; then
   $DEHYDRATED --register --accept-terms --config $CONFIG_FILE
 fi
 
+cp $WORKDIR/{privkey,$(date +%F)}.pem
+
 $DEHYDRATED --signcsr $OPENSSL_REQ --full-chain \
   --config $CONFIG_FILE \
-  > $WORKDIR/full.crt
+  >> $WORKDIR/$(date +%F).pem && (\
+    chmod 400 $WORKDIR/$(date +%F).pem
+    if echo $DESTINATION | grep @ > /dev/null; then
+      scp -P $PORT $WORKDIR/$(date +%F).pem $DESTINATION/$DOMAIN.pem
+    else
+      cp --force $WORKDIR/$(date +%F).pem $DESTINATION/$DOMAIN.pem
+    fi
+  )

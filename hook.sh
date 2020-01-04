@@ -30,20 +30,18 @@ deploy_challenge() {
   #   validation, this is what you want to put in the _acme-challenge
   #   TXT record. For HTTP validation it is the value that is expected
   #   be found in the $TOKEN_FILENAME file.
-  if [ ! -z "${TOKEN_VALUE}" ]; then
-    echo "Creating DNS TXT field [${RECORD}] with value [${TOKEN_VALUE}]."
-    DATA='{"rrset_name": "'${RECORD}'",
+  if [ ! -z $TOKEN_VALUE ]; then
+    echo "Creating DNS TXT field [$RECORD] with value [$TOKEN_VALUE]."
+    DATA='{"rrset_name": "'$RECORD'",
       "rrset_type": "TXT",
       "rrset_ttl": 300,
-      "rrset_values": ["'${TOKEN_VALUE}'"]}'
-    curl -s -X POST -d "${DATA}" \
-      -H "X-Api-Key: ${API_KEY}" \
+      "rrset_values": ["'$TOKEN_VALUE'"]}'
+    curl -s -X POST -d "$DATA" \
+      -H "X-Api-Key: $API_KEY" \
       -H "Content-Type: application/json" \
-      "${API_ENDPOINT}/domains/${DOMAIN}/records"
-    # For debugging purpose
-    # dig +trace "_acme-challenge.${DOMAIN}" TXT
+      "$API_ENDPOINT/domains/$DOMAIN/records"
   else
-    echo "Something went wrong. Can not find token value to set for record ${RECORD}."
+    echo "Something went wrong. Can not find token value to set for record $RECORD."
     exit 1
   fi
 }
@@ -55,10 +53,10 @@ clean_challenge() {
   # files or DNS records that are no longer needed.
   #
   # The parameters are the same as for deploy_challenge.
-  echo "Deleting DNS TXT field [${RECORD}] for domain [${DOMAIN}]."
+  echo "Deleting DNS TXT field [$RECORD] for domain [$DOMAIN]."
   curl -X DELETE -H "Content-Type: application/json" \
-    -H "X-Api-Key: ${API_KEY}" \
-    "${API_ENDPOINT}/domains/${DOMAIN}/records/${RECORD}"
+    -H "X-Api-Key: $API_KEY" \
+    "$API_ENDPOINT/domains/$DOMAIN/records/$RECORD"
 }
 
 deploy_cert() {
@@ -133,7 +131,7 @@ request_failure() {
   #   The specified reason for the error.
   # - REQTYPE
   #   The kind of request that was made (GET, POST...)
-  echo "Query [${REQTYPE}] failed with error: [${REASON}] - status code: [${STATUSCODE}]"
+  echo "Query [$REQTYPE] failed with error: [$REASON] - status code: [$STATUSCODE]"
 }
 
 exit_hook() {
