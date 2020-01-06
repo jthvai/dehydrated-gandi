@@ -119,4 +119,7 @@ $DEHYDRATED --signcsr $OPENSSL_REQ --full-chain \
     else
       cp --force $WORKDIR/$(date +%F).pem $DESTINATION/$DOMAIN.pem
     fi
+  ) && (\
+    if [ ! -d $WORKDIR/archive ]; then mkdir --parents $WORKDIR/archive; fi
+    mv $WORKDIR/{$(date +%F).pem,archive}
   )
