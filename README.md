@@ -27,5 +27,4 @@ These can be found as `pacman` packages in the official Arch Linux repositories.
     Copyright 2018 Thomas Chabaud, GPL v3.0
     Copyright 2020 Elias Yuan <a@jthv.ai>, GPL v3.0+
 
-Refer to [LICENSE](./LICENSE) for the full text. You may also acquire a copy from
-[here](https://gitlab.com/jthvai/licenses/raw/master/GPL-3.0.txt).
+Refer to [LICENSE](./LICENSE) for the full text.
